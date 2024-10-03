@@ -52,12 +52,12 @@
     .contacts__item:last-child{
         margin-right: 0;
     }
-    .btn-red{
-        @include flex(row, center, center);
-        color: #FFF;
-        font-size: 16px;
-        font-weight: 500;
-    }
+}
+.btn-red{
+    @include flex(row, center, center);
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 </style>

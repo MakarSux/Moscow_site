@@ -1,8 +1,11 @@
 <script setup>
+
 import HeaderComp from './components/HeaderComp.vue'
 import EcursionComp from './components/EcursionComp.vue'
 import QAComp from './components/QAComp.vue'
 import ContactsComp from './components/ContactsComp.vue'
+import FooterComp from './components/FooterComp.vue'
+
 </script>
 
 <template>
@@ -36,7 +39,7 @@ import ContactsComp from './components/ContactsComp.vue'
   </main>
 
   <footer>
-
+    <FooterComp />
   </footer>
 </template>
 
@@ -52,7 +55,8 @@ import ContactsComp from './components/ContactsComp.vue'
 main{
   width: 100%;
 }
-.wrapper{
+.wrapper,
+footer{
   width: 100%;
   max-width: 1300px;
   margin: 50px auto;
