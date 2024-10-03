@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 
+:root{
+	--red: #EE1B24;
+}
+
+
 * {
 	padding: 0px;
 	margin: 0px;
@@ -93,8 +98,6 @@ legend {
 
 
 
-
-
 .btn{
 	margin: 0 auto;
 	min-width: 250px;
@@ -107,6 +110,18 @@ legend {
 	padding: 12px 12px 12px 25px;
 }
 
+.red,
 .btn-red{
-	background: #EE1B24;
+	background-color: var(--red);
+}
+
+.btn-border-red{
+	border: 1.5px solid var(--red);
+	background: transparent;
+}
+
+h1.block__title{
+	font-size: 36px;
+	font-weight: 700;
+	padding-bottom: 60px;
 }
