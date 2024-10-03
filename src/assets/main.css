@@ -121,6 +121,7 @@ legend {
 }
 
 h1.block__title{
+	text-align: center;
 	font-size: 36px;
 	font-weight: 700;
 	padding-bottom: 60px;

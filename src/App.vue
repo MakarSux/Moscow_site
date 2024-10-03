@@ -1,6 +1,8 @@
 <script setup>
 import HeaderComp from './components/HeaderComp.vue'
 import EcursionComp from './components/EcursionComp.vue'
+import QAComp from './components/QAComp.vue'
+import ContactsComp from './components/ContactsComp.vue'
 </script>
 
 <template>
@@ -17,7 +19,25 @@ import EcursionComp from './components/EcursionComp.vue'
         <p>Начатть тест</p>
       </button>
     </div>
+    
+    <div class="wrapper">
+      <h1 class="block__title">Фото</h1>
+      <div class="photo__block">
+        <img src="./assets/img/photo-1.png" alt="#">
+        <img src="./assets/img/photo-2.png" alt="#">
+        <img src="./assets/img/photo-3.png" alt="#">
+      </div>
+      <h1 class="block__title">Вопросы-ответы</h1>
+      <QAComp />
+      <h1 class="block__title">Контакты</h1>
+      <div class="green-line"></div>
+      <ContactsComp />
+    </div>
   </main>
+
+  <footer>
+
+  </footer>
 </template>
 
 <style scoped lang="scss">
@@ -60,5 +80,19 @@ main{
     font-size: 14px;
     font-weight: 600;
   }
+}
+.photo__block{
+  width: 100%;
+  @include flex(row, space-between, center);
+  img{
+    border-radius: 9px;
+  }
+  margin-bottom: 100px;
+}
+.green-line{
+  width: 635px;
+  height: 3px;
+  margin: 0 auto;
+  background-color: #037E8C;
 }
 </style>
