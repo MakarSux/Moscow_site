@@ -1,13 +1,65 @@
 <script setup>
 
 import { RouterLink } from 'vue-router';
+import { ref } from 'vue';
+
 import axios from 'axios';
 
-const url = 'http://localhost:8080'
-const register = () => { 
-    axios.post('/api/register')
-}
+const user = ref({
+    name: '',
+    email: '',
+    password: '',
+    c_password: '',
+    jwt_token: ''
+});
 
+const url = 'http://localhost:8080';
+
+const updateUser = (name, email, password, c_password, jwt_token) => {
+    user.value.name = name;
+    user.value.email = email;
+    user.value.password = password;
+    user.value.c_password = c_password;
+    user.value.jwt_token = jwt_token;
+};
+
+const register = () => {
+    const article = {
+        name: user.value.name,
+        email: user.value.email,
+        password: user.value.password,
+        c_password: user.value.c_password
+    };
+
+    axios.post(`${url}/api/register`, article)
+        .then(response => {
+            console.log('Registration successful:', response.data);
+            // Обновляем токен после регистрации, если сервер возвращает его
+            updateUser(user.value.name, user.value.email, user.value.password, user.value.c_password, response.data.token);
+        })
+        .catch(error => {
+            console.error('Registration failed:', error);
+        });
+};
+
+const login = () => {
+    const article = {
+        email: user.value.email,
+        password: user.value.password
+    };
+
+    axios.post(`${url}/api/login`, article)
+        .then(response => {
+            console.log('Login successful:', response.data);
+            // Обновляем токен после входа, если сервер возвращает его
+            updateUser(user.value.name, user.value.email, user.value.password, user.value.c_password, response.data.token);
+        })
+        .catch(error => {
+            console.error('Login failed:', error);
+        });
+};
+
+export { user, updateUser, register, login };
 
 </script>
 
