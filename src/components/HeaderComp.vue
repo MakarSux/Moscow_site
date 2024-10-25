@@ -1,9 +1,11 @@
 <script setup>
 
 import { RouterLink } from 'vue-router';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
 import axios from 'axios';
+
+const userIsLoggedIn = ref(false);
 
 const user = ref({
     name: '',
@@ -13,7 +15,7 @@ const user = ref({
     jwt_token: ''
 });
 
-const url = 'http://localhost:8080';
+const url = 'http://127.0.0.1:8000';
 
 const updateUser = (name, email, password, c_password, jwt_token) => {
     user.value.name = name;
@@ -22,6 +24,12 @@ const updateUser = (name, email, password, c_password, jwt_token) => {
     user.value.c_password = c_password;
     user.value.jwt_token = jwt_token;
 };
+
+// onMounted(() => {
+//     const registerModal = new bootstrap.Modal('#registerModal', {hide: true});
+//     const loginModal = new bootstrap.Modal('#loginModal', {hide: true});
+// })
+
 
 const register = () => {
     const article = {
@@ -36,6 +44,9 @@ const register = () => {
             console.log('Registration successful:', response.data);
             // Обновляем токен после регистрации, если сервер возвращает его
             updateUser(user.value.name, user.value.email, user.value.password, user.value.c_password, response.data.token);
+            userIsLoggedIn.value = true; // Обновляем состояние входа
+            const registerModalClose = document.querySelector('#close-btn-log');
+            registerModalClose.click();
         })
         .catch(error => {
             console.error('Registration failed:', error);
@@ -52,15 +63,15 @@ const login = () => {
         .then(response => {
             console.log('Login successful:', response.data);
             // Обновляем токен после входа, если сервер возвращает его
-            updateUser(user.value.name, user.value.email, user.value.password, user.value.c_password, response.data.token);
+            updateUser(response.data.name, user.value.email, user.value.password, user.value.c_password, response.data.token);
+            userIsLoggedIn.value = true; // Обновляем состояние входа
+            const loginModalClose = document.querySelector('#close-btn-log');
+            loginModalClose.click();
         })
         .catch(error => {
             console.error('Login failed:', error);
         });
 };
-
-export { user, updateUser, register, login };
-
 </script>
 
 <template>
@@ -71,9 +82,13 @@ export { user, updateUser, register, login };
                 <div class="header__top-sec">
                     <div class="header__menu-auth">
                         <nav>
-                            <ul>
-                                <li><a href="">Войти</a></li>
-                                <li><a href="">Загерестрироваться</a></li>
+                            <ul v-if="!userIsLoggedIn">
+                                <li><a href="" data-bs-toggle="modal" data-bs-target="#loginModal">Войти</a></li>
+                                <li><a href="" data-bs-toggle="modal"
+                                        data-bs-target="#registerModal">Загерестрироваться</a></li>
+                            </ul>
+                            <ul v-else>
+                                <li><a href="">{{ user.name }}</a></li>
                             </ul>
                         </nav>
                     </div>
@@ -102,7 +117,7 @@ export { user, updateUser, register, login };
             <div class="header__center">
                 <h1>Экскурсии <br> по Москве</h1>
                 <p>приезжайте за новыми ощущениями и эмоциями!</p>
-                <button class="btn btn-red">
+                <button class="btn-l btn-red">
                     <p>Подобрать маршрут</p>
                     <div class="btn__circle">
                         <img src="../assets/img/arrow.png" alt="">
@@ -110,9 +125,76 @@ export { user, updateUser, register, login };
                 </button>
             </div>
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="loginModalLabel">Войти</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" v-model="user.email"
+                                    placeholder="name@example.com">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Пароль</label>
+                                <input type="password" class="form-control" id="password" v-model="user.password">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="close-btn-log" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        <button type="button" class="btn btn-primary" @click="login">Войти</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="registerModalLabel">Загерестрироваться</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Логин</label>
+                                <input type="text" class="form-control" id="name" v-model="user.name"
+                                    placeholder="username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" v-model="user.email"
+                                    placeholder="name@example.com">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Пароль</label>
+                                <input type="password" class="form-control" id="password" v-model="user.password">
+                            </div>
+                            <div class="mb-3">
+                                <label for="c_password" class="form-label">Повторите пароль</label>
+                                <input type="password" class="form-control" id="c_password" v-model="user.c_password">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="close-btn-reg" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                        <button type="button" class="btn btn-primary" @click="register">Загерестрироваться</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
-
 <style lang="scss">
 .header {
     width: 100%;
@@ -224,7 +306,7 @@ export { user, updateUser, register, login };
                 p {
                     font-size: 16px;
                     font-weight: 500;
-                    padding-bottom: 0;
+                    padding-bottom: 0 !important;
                 }
 
                 .btn__circle {

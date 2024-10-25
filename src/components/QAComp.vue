@@ -9,7 +9,7 @@
             если у вас есть какие-либо вопросы, предложения 
             или идеи для сотрудничества
         </p>
-        <button class="btn btn-red">Задать вопрос</button>
+        <button class="btn-l btn-red">Задать вопрос</button>
     </div>
 </template>
 

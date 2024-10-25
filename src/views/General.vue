@@ -9,7 +9,7 @@ import ContactsComp from '@/components/ContactsComp.vue'
     <div class="chooise__block">
         <h1 class="chooise__naming">Затрудняетесь выбрать экскурсию?</h1>
         <p class="chooise__decription">Пройдите тест и мы поможем вам подобрать оптимальную под вас экскурсию</p>
-        <button class="btn btn-red">
+        <button class="btn-l btn-red">
             <p>Начатть тест</p>
         </button>
     </div>

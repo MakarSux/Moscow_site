@@ -23,7 +23,7 @@
             </p>
         </div>
     </div>
-    <button class="btn btn-red">Написать нам</button>
+    <button class="btn-l btn-red">Написать нам</button>
 </template>
 
 

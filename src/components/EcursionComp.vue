@@ -54,8 +54,8 @@
                             -Форсаж
                         </p>
                         <div class="btns">
-                            <button class="btn btn-border-red">Подробнее</button>
-                            <button class="btn btn-red">Забронировать</button>
+                            <button class="btn-l btn-border-red">Подробнее</button>
+                            <button class="btn-l btn-red">Забронировать</button>
                         </div>
                     </div>
                 </div>
@@ -89,8 +89,8 @@
                             - Коломенское (прогулка по парку,  ужин с видом на парк)
                         </p>
                         <div class="btns">
-                            <button class="btn btn-border-red">Подробнее</button>
-                            <button class="btn btn-red">Забронировать</button>
+                            <button class="btn-l btn-border-red">Подробнее</button>
+                            <button class="btn-l btn-red">Забронировать</button>
                         </div>
                     </div>
                 </div>
