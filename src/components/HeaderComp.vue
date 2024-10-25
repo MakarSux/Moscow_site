@@ -1,5 +1,14 @@
 <script setup>
+
 import { RouterLink } from 'vue-router';
+import axios from 'axios';
+
+const url = 'http://localhost:8080'
+const register = () => { 
+    axios.post('/api/register')
+}
+
+
 </script>
 
 <template>
@@ -25,7 +34,7 @@ import { RouterLink } from 'vue-router';
                                 <RouterLink to="/excursions">Экскурсии</RouterLink>
                             </li>
                             <li>
-                                <RouterLink to="/videos">Видео</RouterLink>
+                                <RouterLink to="/videos#video">Видео</RouterLink>
                             </li>
                             <li>
                                 <RouterLink to="/feedback">Обратная связь</RouterLink>

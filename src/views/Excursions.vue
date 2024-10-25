@@ -1,7 +1,12 @@
 <script setup>
+
+import EcursionComp from '@/components/EcursionComp.vue'
+
 </script>
 
 <template>
+
+<EcursionComp />
 
 </template>
 

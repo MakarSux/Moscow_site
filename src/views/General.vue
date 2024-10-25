@@ -17,9 +17,9 @@ import ContactsComp from '@/components/ContactsComp.vue'
     <div class="wrapper">
         <h1 class="block__title">Фото</h1>
         <div class="photo__block">
-            <img src="./assets/img/photo-1.png" alt="#">
-            <img src="./assets/img/photo-2.png" alt="#">
-            <img src="./assets/img/photo-3.png" alt="#">
+            <img src="../assets/img/photo-1.png" alt="#">
+            <img src="../assets/img/photo-2.png" alt="#">
+            <img src="../assets/img/photo-3.png" alt="#">
         </div>
         <h1 class="block__title">Вопросы-ответы</h1>
         <QAComp />

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import General from '@/views/general.vue';
+import General from '@/views/General.vue';
 import Feedback from "@/views/Feedback.vue";
 import Excursions from "@/views/Excursions.vue";
 import Videos from "@/views/Videos.vue";
